@@ -1,0 +1,6 @@
+set_up.py
+/Users/yuenze/Study_Local/funpar/C_project/c_extension.c
+c_extension.egg-info/PKG-INFO
+c_extension.egg-info/SOURCES.txt
+c_extension.egg-info/dependency_links.txt
+c_extension.egg-info/top_level.txt
