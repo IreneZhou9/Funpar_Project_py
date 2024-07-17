@@ -55,6 +55,10 @@ def rust_argsort(arr):
     return dotpro.argsort(arr)
 
 @timer
+def rust_argsort_old(arr):
+    return dotpro.argsort_old(arr)
+
+@timer
 def np_argsort(arr):
     return np.argsort(arr)
 
@@ -108,18 +112,18 @@ if __name__ == '__main__':
 
 
     # Benchmarking matrix multiplication
-    data = generate_matrix(size=50, range_=(1, 100))
+    data = generate_matrix(size=500, range_=(1, 100))
     numpy_time_taken, numpy_result = np_matmul(*data)
-    python_time_taken, python_result = py_matmul(*data)
+    # python_time_taken, python_result = py_matmul(*data)
     c_par_time_taken, c_result = c_matmul(*data)
-    print(f"matrix multiply time taken with python: {python_time_taken} seconds")
+    # print(f"matrix multiply time taken with python: {python_time_taken} seconds")
     print(f"matrix multiply time taken with numpy: {numpy_time_taken:.6f} seconds")
     print(f"matrix multiply time taken with c par: {c_par_time_taken:.6f} seconds")
 
     # Benchmarking argsort
-    data = np.random.randint(0, 1000, size=10000000).tolist()
+    data = np.random.randint(0, 1000, size=1000000).tolist()
 
-    np_time_taken, mp_result = np_argsort(data)
+    np_time_taken, np_result = np_argsort(data)
     print(f"argsort time taken with numpy: {np_time_taken:.6f} seconds")
     rust_time_taken, rust_result = rust_argsort(data)
     print(f"argsort time taken with rust: {rust_time_taken:.6f} seconds")
@@ -131,7 +135,7 @@ if __name__ == '__main__':
     rust_time_taken, rust_result = rust_con(arr1, arr2)
     rust_exp_time_taken, rust_exp_result = rust_con_exp(arr1, arr2)
     print(f"convolve time taken with numpy: {numpy_time_taken:.6f} seconds")
-    print(f"convolve time taken with rust: {rust_time_taken:.6f} seconds")
-    print(f"convolve time taken with rust exp: {rust_exp_time_taken:.6f} seconds")
+    print(f"convolve time taken with rust (rayon): {rust_time_taken:.6f} seconds")
+    print(f"convolve time taken with rust (thread pool): {rust_exp_time_taken:.6f} seconds")
 
 
